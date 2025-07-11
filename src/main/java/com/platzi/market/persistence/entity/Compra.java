@@ -3,6 +3,7 @@ package com.platzi.market.persistence.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "compras")
@@ -24,6 +25,15 @@ public class Compra {
     @Column(name = "medio_pago")
     private String medioPago;
 
+    @OneToMany(mappedBy = "compra")
+    private List<CompraProducto> productos;
+
+    @ManyToOne
+    @JoinColumn(name = "id_cliente", insertable = false, updatable = false)
+    private Cliente cliente;
+
+
+    //-------------------------------------------------Getter and Setter---------------------------------------------------------------------
 
     public Integer getIdCompra() {
         return idCompra;
